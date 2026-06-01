@@ -135,4 +135,4 @@ jobs:
         working-directory: terraform
         run: |
           terraform apply -auto-approve \
-            -var="app_image=${{ needs.docker.outputs.image_url }}"
+            -var="app_image=${{ needs.docker.outputs.image_url }}" -var="db_password=${{ secrets.TF_VAR_db_password }}"
