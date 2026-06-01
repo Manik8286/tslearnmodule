@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - gitmodule
   pull_request:
     branches:
-      - main
+      - gitmodule
 
 env:
   AWS_REGION:     us-east-1
