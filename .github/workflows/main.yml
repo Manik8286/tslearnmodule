@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - gitmodule
-  pull_request:
-    branches:
-      - gitmodule
 
 env:
   AWS_REGION:     us-east-1
@@ -21,7 +18,7 @@ jobs:
   docker:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/gitmodule' && github.event_name == 'push'
 
     outputs:
       image_url: ${{ steps.build.outputs.image_url }}   # pass image URL to terraform job
