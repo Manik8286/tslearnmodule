@@ -75,7 +75,7 @@ module "ecs" {
 # -------------------------------------------------------
 module "s3" {
   source      = "git::https://github.com/Manik8286/tslearnmodule.git//terraform/modules/s3?ref=main"
-  bucket_name = "learning-taskbucket-mani-2026"
+  bucket_name = "learning-taskbucket-mani-2026-v2"
 }
 
 module "database" {
