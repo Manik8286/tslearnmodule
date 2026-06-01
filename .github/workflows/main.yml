@@ -48,11 +48,11 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -var="app_image=public.ecr.aws/docker/library/python:3.12-slim"
+        run: terraform plan -var="app_image=public.ecr.aws/docker/library/python:3.12-slim" -var="db_password=${{ secrets.TF_VAR_db_password }}"
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/gitmodule' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var="app_image=public.ecr.aws/docker/library/python:3.12-slim"
+        run: terraform apply -auto-approve -var="app_image=public.ecr.aws/docker/library/python:3.12-slim" -var="db_password=${{ secrets.TF_VAR_db_password }}"
 
       - name: Get ECR URL
         id: tf_output
