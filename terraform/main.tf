@@ -6,7 +6,7 @@ provider "aws" {
 # Networking — VPC, subnets, IGW, NAT, route tables
 # -------------------------------------------------------
 module "networking" {
-  source = "https://github.com/Manik8286/tslearnmodule.git//terraform/modules/networking?ref=main"
+  source = "https://github.com/Manik8286/tslearnmodule.git/terraform/modules/networking?ref=main"
 
   vpc_cidr             = "10.0.0.0/16"
   public_subnet_1_cidr = "10.0.1.0/24"
@@ -19,7 +19,7 @@ module "networking" {
 # Security Groups — depends on networking
 # -------------------------------------------------------
 module "security_group" {
-  source = "https://github.com/Manik8286/tslearnmodule.git//terraform/modules/security_group?ref=main"
+  source = "https://github.com/Manik8286/tslearnmodule.git/terraform/modules/security_group?ref=main"
 
   vpc_id = module.networking.vpc_id
 }
@@ -28,7 +28,7 @@ module "security_group" {
 # ALB — depends on networking + security_group
 # -------------------------------------------------------
 module "alb" {
-  source = "https://github.com/Manik8286/tslearnmodule.git//terraform/modules/alb?ref=main"
+  source = "https://github.com/Manik8286/tslearnmodule.git/terraform/modules/alb?ref=main"
 
   vpc_id             = module.networking.vpc_id
   alb_sg_id          = module.security_group.alb_sg_id
@@ -40,7 +40,7 @@ module "alb" {
 # ECR — independent
 # -------------------------------------------------------
 module "ecr" {
-  source   = "https://github.com/Manik8286/tslearnmodule.git//terraform/modules/ecr?ref=main"
+  source   = "https://github.com/Manik8286/tslearnmodule.git/terraform/modules/ecr?ref=main"
   ecr_name = "tsk-image"
 }
 
@@ -48,14 +48,14 @@ module "ecr" {
 # IAM — independent
 # -------------------------------------------------------
 module "iam" {
-  source = "https://github.com/Manik8286/tslearnmodule.git//terraform/modules/iam?ref=main"
+  source = "https://github.com/Manik8286/tslearnmodule.git/terraform/modules/iam?ref=main"
 }
 
 # -------------------------------------------------------
 # ECS — depends on networking, security_group, alb, iam
 # -------------------------------------------------------
 module "ecs" {
-  source = "https://github.com/Manik8286/tslearnmodule.git//terraform/modules/ecs?ref=main"
+  source = "https://github.com/Manik8286/tslearnmodule.git/terraform/modules/ecs?ref=main"
 
   app_image          = var.app_image
   execution_role_arn = module.iam.ecs_execution_role_arn
@@ -74,12 +74,12 @@ module "ecs" {
 # S3 — independent
 # -------------------------------------------------------
 module "s3" {
-  source      = "https://github.com/Manik8286/tslearnmodule.git//terraform/modules/s3?ref=main"
+  source      = "https://github.com/Manik8286/tslearnmodule.git/terraform/modules/s3?ref=main"
   bucket_name = "learning-taskbucket-mani-2026"
 }
 
 module "database" {
-  source = "https://github.com/Manik8286/tslearnmodule.git//terraform/modules/database?ref=main"
+  source = "https://github.com/Manik8286/tslearnmodule.git/terraform/modules/database?ref=main"
 
   vpc_id      = module.networking.vpc_id
   rds_sg_id   = module.security_group.rds_sg_id
