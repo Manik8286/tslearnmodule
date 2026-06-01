@@ -24,6 +24,23 @@ resource "aws_ecs_task_definition" "task_app" {
       containerPort = 8000
       protocol      = "tcp"
     }]
+
+    environment = [
+      { name = "DB_HOST",     value = var.db_host },
+      { name = "DB_PORT",     value = "5432" },
+      { name = "DB_NAME",     value = var.db_name },
+      { name = "DB_USER",     value = var.db_username },
+      { name = "DB_PASSWORD", value = var.db_password }
+    ]
+
+    logConfiguration = {
+      logDriver = "awslogs"
+      options = {
+        awslogs-group         = "/ecs/task-app"
+        awslogs-region        = "us-east-1"
+        awslogs-stream-prefix = "ecs"
+      }
+    }
   }])
 }
 
