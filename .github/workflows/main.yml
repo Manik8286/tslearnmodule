@@ -91,6 +91,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG:    ${{ github.sha }}
+          ECR_REPOSITORY: tsk-image
         run: |
           docker build \
             --platform linux/amd64 \
