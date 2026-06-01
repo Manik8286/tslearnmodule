@@ -1,3 +1,11 @@
+on:
+  push:
+    branches:
+      - gitmodule
+  pull_request:
+    branches:
+      - gitmodule
+
 jobs:
   # -------------------------------------------------------
   # Job 1: Terraform — creates all infra including ECR
