@@ -1,7 +1,7 @@
 variable "app_image" {
   description = "Docker image URL from ECR"
   type        = string
-  default     = "public.ecr.aws/docker/library/python:3.12-slim"
+  default     = "897722694412.dkr.ecr.us-east-1.amazonaws.com/tsk-image:latest"
 }
 
 variable "db_password" {
